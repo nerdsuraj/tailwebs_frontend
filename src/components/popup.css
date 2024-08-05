@@ -1,0 +1,43 @@
+/* popup.css */
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+.modal-title {
+    color: #333;
+}
+
+.form-group label {
+    color: #555;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group-prepend .input-group-text {
+    background-color: white;
+    border: none;
+}
+
+.input-group-text {
+    margin-right: 5px;
+}
+
+button.btn-primary {
+    background-color: black;
+    border: none;
+}
+
+button.btn-primary:hover {
+    background-color: darkgray;
+}
