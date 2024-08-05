@@ -22,6 +22,8 @@ const Studentlist = ({ setApiKey }) => {
 
   const getStudentslist = () => {
     setLoading(true);
+    // let auth = localStorage.getItem('token');
+    // auth = auth.replace('DOOflA8u140fyPfUkb59jl330uORpxfJOKErB8p1X1Y', '');
     axios.get('http://localhost:4001/api/student/student_list', {
       headers: {
         'authorization': localStorage.getItem('token'),
@@ -36,8 +38,9 @@ const Studentlist = ({ setApiKey }) => {
         console.log('error while fetching the student list:', response.data.message);
       }
     }).catch((error) => {
-      console.log('error while fetching the student list:', error);
+      console.log('error while fetching the student list:', error.response.data.msg);
       setLoading(false);
+      toast.error(error.response.data.msg);
 
     });
   };
