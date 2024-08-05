@@ -26,7 +26,7 @@ const Login = ({setApiKey}) => {
             console.log('response:', response);
             if(response.status === 200) {
                 toast.success('Login successful');
-                setLoading(true);
+                setLoading(false);
                 localStorage.setItem('token', response.data.apiKey);
                 setApiKey(response.data.apiKey);
             } else {
@@ -35,6 +35,7 @@ const Login = ({setApiKey}) => {
         }).catch((error) => {
             console.log('error:', error);
             toast.error(error.response.data.message);
+            setLoading(false);
         });
 
     };
