@@ -4,17 +4,24 @@ import './login.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const Login = ({setApiKey}) => {
+const Login = ({ setApiKey }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('username:', username);
         console.log('password:', password);
-        if(username === '' || password === '') {
+        if (username === '' || password === '') {
             toast.error('Please fill all the fields');
             return;
         }
@@ -24,7 +31,7 @@ const Login = ({setApiKey}) => {
             password: password
         }).then((response) => {
             console.log('response:', response);
-            if(response.status === 200) {
+            if (response.status === 200) {
                 toast.success('Login successful');
                 setLoading(false);
                 localStorage.setItem('token', response.data.apiKey);
@@ -51,7 +58,10 @@ const Login = ({setApiKey}) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" value={password} placeholder="********" onChange={(e) => setPassword(e.target.value)} />
+                        <input type={showPassword ? "text" : "password"} id="password" value={password} placeholder="********" onChange={(e) => setPassword(e.target.value)} />
+                        <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
+                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                        </span>
                     </div>
                     <button type="submit" className="login-button" disabled={loading}>{loading ? 'Logging in...' : 'Login'}</button>
                 </form>
